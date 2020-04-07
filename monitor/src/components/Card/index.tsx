@@ -4,14 +4,14 @@ import { get } from "../../services";
 
 import { Container, Text, Display } from "./styles";
 
-const timer = 5000;
+const seconds = 30;
 
-const Card: React.FC<ICard> = ({ name, url }) => {
+const Card: React.FC<ICard> = ({ name, url, options }) => {
   const [status, setStatus] = useState(false);
 
   const request = useCallback(
     () =>
-      get(url)
+      get(url, options)
         .then((result) => {
           if (result.status === 200) setStatus(true);
         })
@@ -19,13 +19,13 @@ const Card: React.FC<ICard> = ({ name, url }) => {
           console.log(err);
           setStatus(false);
         }),
-    [url]
+    [url, options]
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
       request();
-    }, timer);
+    }, seconds * 100);
 
     return () => {
       clearInterval(interval);
@@ -45,6 +45,7 @@ export default Card;
 export interface ICard {
   name: string;
   url: string;
+  options?: Object;
 }
 
 export interface IDisplay {

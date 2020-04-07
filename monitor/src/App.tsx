@@ -11,7 +11,12 @@ function App() {
       <Title>O VITU VÊ TUDO</Title>
       <Services>
         {apis.map((elem: ICard, i: number) => (
-          <Card key={i} name={elem.name} url={elem.url}></Card>
+          <Card
+            key={i}
+            name={elem.name}
+            url={elem.url}
+            options={elem.options}
+          ></Card>
         ))}
       </Services>
     </Container>
