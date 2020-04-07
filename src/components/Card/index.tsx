@@ -12,7 +12,7 @@ const Card: React.FC<ICard> = ({ name, url, options }) => {
   const request = useCallback(
     () =>
       get(url, options)
-        .then((result) => {
+        .then(result => {
           if (result.status === 200) setStatus(true);
         })
         .catch((err: Error) => {
@@ -25,7 +25,7 @@ const Card: React.FC<ICard> = ({ name, url, options }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       request();
-    }, seconds * 100);
+    }, seconds * 1000);
 
     return () => {
       clearInterval(interval);
