@@ -25,16 +25,16 @@ const Card: React.FC<ICard> = ({ name, url, options }) => {
         })
         .catch((err: Error) => {
           console.log(err);
+          sendSms(name);
 
           setStatus(false);
         }),
-    [url, options]
+    [url, options, name, sendSms]
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
       request();
-      if (!status) sendSms(name);
     }, seconds * 1000);
 
     return () => {

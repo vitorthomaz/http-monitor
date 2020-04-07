@@ -11,7 +11,7 @@ export const sms = (name: string) => {
     "https://catchup.grupomateus.com.br:8094/api/gestor/apigestor/v1/enviar/sms";
 
   const data = {
-    telefone: "98991170011",
+    telefone: "98982239829",
     mensagem: `O serviço ${name} parece estar fora do ar.`
   };
 

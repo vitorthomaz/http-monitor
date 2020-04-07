@@ -20,10 +20,7 @@ const apis: ICard[] = [
     name: "Consulta de Produto",
     url: "https://catchup.grupomateus.com.br:8094/api/catchup/v2/produto/5",
     options: {
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json"
-      },
+      ...defaultOptions,
       params: {
         id_filial: 7
       }
