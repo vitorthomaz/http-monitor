@@ -8,7 +8,7 @@ import apis from "./config";
 function App() {
   return (
     <Container>
-      <Title>O VITU VÊ TUDO</Title>
+      <Title>MONITOR</Title>
       <Services>
         {apis.map((elem: ICard, i: number) => (
           <Card
@@ -27,8 +27,8 @@ const Title = styled.span`
   display: flex;
   flex-direction: row;
 
-  font-size: 24px;
-  color: ${(props) => props.theme.color.text.white};
+  font-size: 32px;
+  color: ${props => props.theme.color.text.white};
 `;
 
 const Container = styled.div`
@@ -42,7 +42,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: ${(props) => props.theme.background.secondary};
+  background: ${props => props.theme.background.secondary};
 
   border: 1px solid black;
   border-radius: 6px;

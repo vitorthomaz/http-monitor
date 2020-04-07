@@ -13,8 +13,8 @@ const apis: ICard[] = [
   {
     name: "Recrutameto",
     url:
-      "https://catchup.grupomateus.com.br:8094/api/gestor/apigestor/v1/recrutamentos"
-    // options: defaultOptions
+      "https://catchup.grupomateus.com.br:8094/api/gestor/apigestor/v1/recrutamentos",
+    options: defaultOptions
   },
   {
     name: "Consulta de Produto",
