@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import { get } from "../../services";
+import { get, sms } from "../../services";
 
 import { Container, Text, Display } from "./styles";
 
-const seconds = 30;
+const seconds = 10;
 
 const Card: React.FC<ICard> = ({ name, url, options }) => {
   const [status, setStatus] = useState(false);
+
+  const sendSms = useCallback(
+    service =>
+      sms(service)
+        .then(() => {})
+        .catch(err => console.log(err)),
+    []
+  );
 
   const request = useCallback(
     () =>
@@ -17,6 +25,7 @@ const Card: React.FC<ICard> = ({ name, url, options }) => {
         })
         .catch((err: Error) => {
           console.log(err);
+
           setStatus(false);
         }),
     [url, options]
@@ -25,6 +34,7 @@ const Card: React.FC<ICard> = ({ name, url, options }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       request();
+      if (!status) sendSms(name);
     }, seconds * 1000);
 
     return () => {
