@@ -1,15 +1,17 @@
-const socket = require("socket.io");
-const { createServer } = require("http");
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const App = (port) => {
-  const httpServer = createServer();
-  const sktServer = socket(httpServer);
+const routes = require("./routes");
 
-  sktServer.listen(port);
+const App = () => {
+  const server = express();
 
-  sktServer.on("connect", () => {
-    console.log("Somebody connected");
-  });
+  server.use(cors());
+  server.use(bodyParser.json());
+  server.use(routes);
+
+  return server;
 };
 
 module.exports = App;

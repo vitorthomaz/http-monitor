@@ -1,29 +1,36 @@
-import React, { useState, useCallback, useEffect } from "react";
-import io from "socket.io-client";
+import React, { useState, useEffect, useCallback } from "react";
+
+import { get } from "../../services";
 
 import { Container, Text, Display } from "./styles";
+
+const timer = 5000;
 
 const Card: React.FC<ICard> = ({ name, url }) => {
   const [status, setStatus] = useState(false);
 
-  const socket = useCallback(() => {
-    const socket = io.connect(url);
-
-    socket.on("connect", () => {
-      console.log("Connected to " + url);
-      setStatus(true);
-    });
-
-    socket.on("disconnect", () => {
-      console.log("Disconnected from " + url);
-
-      setStatus(false);
-    });
-  }, [url]);
+  const request = useCallback(
+    () =>
+      get(url)
+        .then((result) => {
+          if (result.status === 200) setStatus(true);
+        })
+        .catch((err: Error) => {
+          console.log(err);
+          setStatus(false);
+        }),
+    [url]
+  );
 
   useEffect(() => {
-    socket();
-  }, [socket]);
+    const interval = setInterval(() => {
+      request();
+    }, timer);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
 
   return (
     <Container>

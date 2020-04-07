@@ -1,3 +1,5 @@
 const App = require("./index");
 
-App(4001);
+App().listen(4001, () => {
+  console.log(`Server listening on port ${4001}`);
+});
